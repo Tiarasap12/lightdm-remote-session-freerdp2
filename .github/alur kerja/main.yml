@@ -1,0 +1,69 @@
+# vim: atur ts=2 sts=2 sw=2 expandtab :
+
+dist : bionik
+
+bahasa : cangkang
+
+os : linux
+
+lengkungan :
+
+  - amd64
+
+  - ppc64le
+
+layanan :
+
+  - buruh pelabuhan
+
+tambahan :
+
+  tepat :
+
+    paket :
+
+      - python3-pip
+
+      - python3-setuptools
+
+sebelum_instal :
+
+  # ayo gunakan skrip build docker proyek Indikator Ayatana...
+
+  - curl -Ls -o docker-build https://github.com/AyatanaIndicators/ayatana-dev-scripts/raw/master/travis/docker-build
+
+  - chmod +x docker-build
+
+instal :
+
+  - roda pemasangan pip3
+
+  - pip3 instal PyGithub
+
+  - ./docker-build --name ${DISTRO} --config .build.yml --install
+
+skrip :
+
+  - ./docker-build --name ${DISTRO} --verbose --config .build.yml --bangun skrip
+
+env :
+
+# temp menonaktifkan build archlinux, lihat https://gitlab.archlinux.org/archlinux/archlinux-docker/-/issues/56
+
+#   - DISTRO="archlinux:terbaru"
+
+  - DISTRO="debian:pengujian"
+
+  - DISTRO = "debian: stabil"
+
+#   - DISTRO="ubuntu: bergulir"
+
+  - DISTRO="ubuntu:fokus"
+
+pekerjaan :
+
+  kecualikan :
+
+    - env : DISTRO="archlinux:terbaru"
+
+      lengkung : ppc64le
